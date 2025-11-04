@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>
+    <title> cardapio </title>
 
     <p>  cardapio online  </p>
 
@@ -12,7 +12,7 @@
     <br>
     <h1>entrar como adm</h1><button>entrar como adm</button>
 
-    </title>
+    
 </head>
 <body>
     
