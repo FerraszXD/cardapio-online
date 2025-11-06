@@ -1,0 +1,35 @@
+h1{
+color: rgb(255, 255, 255);
+text-align: center;
+margin: auto;
+display: block;
+
+}
+button{
+    color: rgb(255, 255, 255);
+    background-color: rgb(71, 95, 230);
+    border-radius: 8px;
+    padding: 10px;
+    margin: auto;
+    margin-bottom: 20%;
+    display: block;
+    cursor: pointer;
+    font-size: 15px;
+}
+p{
+    color: rgb(255, 255, 255);
+    text-align: center;
+    font-size: 40px;
+    
+}
+
+body{
+    align-content: center;
+    background-color: rgb(40, 25, 110);
+    background-image: url(img/fundo_restaurante_borrado.jpg); 
+    background-attachment: fixed;
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+
