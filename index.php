@@ -1,23 +1,42 @@
+<?php
+session_start();
+include "conexao.php";
+$conn = conexao();
+
+if ($_POST) {
+    $usuario = $_POST['usuario'];
+    $senha = md5($_POST['senha']);
+
+    $sql = "SELECT * FROM admin WHERE NOME_adm='$usuario' AND SENHA_adm='$senha'";
+    $result = $conn->query($sql);
+
+    if ($result->num_rows > 0) {
+        $_SESSION['admin'] = true;
+        header("Location: adm.php");
+        exit;
+    } else {
+        $erro = "Usuário ou senha errados, genio.";
+    }
+}
+?>
+
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-
-    <link rel="stylesheet" href="estilo.css"></link>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title> cardapio </title>
-
+    <title>Login Admin</title>
 </head>
 <body>
-    
-<p>  cardapio online  </p>
 
+<h2>Login do Administrador</h2>
 
-    <h1>Cliente?</h1>
-    <button>entrar como cliente</button>
+<form method="post">
+    <input type="text" name="usuario" placeholder="Usuário" required><br><br>
+    <input type="password" name="senha" placeholder="Senha" required><br><br>
+    <button type="submit">Entrar</button>
+</form>
 
-    <h1>administrador da pagina?</h1>
-    <button>entrar como adm</button>
+<?php if(!empty($erro)) echo "<p style='color:red;'>$erro</p>"; ?>
 
 </body>
 </html>
