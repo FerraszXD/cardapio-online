@@ -3,9 +3,8 @@ include "conexao.php";
 $conn = conexao();
 
 $sql = "SELECT * FROM itens";
-$result = $conn->query($sql);
+$stmt = $conn->query($sql);
 ?>
-
 
 <!DOCTYPE html>
 <html lang="pt-BR">
@@ -24,7 +23,7 @@ $result = $conn->query($sql);
 <section class="cardapio">
 
 <?php
-while($row = $result->fetch_assoc()):
+while($row = $stmt->fetch(PDO::FETCH_ASSOC)):
 ?>
     <div class="item">
         <img src="<?php echo $row['IMG_itens']; ?>" alt="foto">

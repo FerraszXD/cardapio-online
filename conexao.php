@@ -1,16 +1,15 @@
 <?php
 function conexao() {
-    $host = "localhost";
-    $user = "root";
-    $pass = "";
-    $db = "cardapio";
+    $dns = "mysql:host=localhost;dbname=cardapio;charset=utf8";
+    $username = 'root';
+    $password = '';
 
-    $conn = new mysqli($host, $user, $pass, $db);
-
-    if ($conn->connect_error) {
-        die("Erro FDP na conexão: " . $conn->connect_error);
+    try {
+        $pdo = new PDO($dns, $username, $password);
+        $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+        return $pdo; // Faltava este return
+    } catch (PDOException $erro) {
+        die("Falha na conexão: " . $erro->getMessage());
     }
-
-    return $conn;
 }
 ?>

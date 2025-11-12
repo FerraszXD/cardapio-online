@@ -9,18 +9,21 @@ include "conexao.php";
 $conn = conexao();
 
 if ($_POST) {
-    $nome = $_POST['NOME_itens'];
-    $descricao = $_POST['DCC_itens'];
-    $preco = $_POST['PRECO_itens'];
-    $imagem = $_POST['IMG_itens'];
+    $nome = $_POST['nome'];
+    $descricao = $_POST['descricao'];
+    $preco = $_POST['preco'];
+    $imagem = $_POST['imagem'];
 
-    $sql = "INSERT INTO pratos (NOME_itens, DCC_itens, PRECO_itens, IMG_itens) 
-            VALUES ('$nome', '$descricao', '$preco', '$imagem')";
-
-    if ($conn->query($sql)) {
+    // Correção: usar PDO prepared statements
+    $sql = "INSERT INTO itens (NOME_itens, DCC_itens, PRECO_itens, IMG_itens) 
+            VALUES (?, ?, ?, ?)";
+    
+    $stmt = $conn->prepare($sql);
+    
+    if ($stmt->execute([$nome, $descricao, $preco, $imagem])) {
         $msg = "Prato adicionado com sucesso carai!";
     } else {
-        $msg = "Deu ruim: " . $conn->error;
+        $msg = "Deu ruim: " . implode(", ", $stmt->errorInfo());
     }
 }
 ?>
@@ -31,6 +34,34 @@ if ($_POST) {
     <meta charset="UTF-8">
     <title>Painel do Admin</title>
 </head>
+<style>
+        body {
+            max-width: 400px;
+            margin: 50px auto;
+            padding: 20px;
+            font-family: Arial, sans-serif;
+        }
+        form {
+            background: #f5f5f5;
+            padding: 20px;
+            border-radius: 8px;
+        }
+        input {
+            width: 100%;
+            padding: 8px;
+            margin: 5px 0;
+            box-sizing: border-box;
+        }
+        button {
+            background: #5a1fa3;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            margin: 5px;
+        }
+    </style>
 <body>
 
 <h2>Adicionar Prato ao Cardápio</h2>
