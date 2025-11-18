@@ -1,115 +1,175 @@
 <?php
 session_start();
-
-// Inicializar carrinho se não existir
-if (!isset($_SESSION['carrinho'])) {
-    $_SESSION['carrinho'] = [];
-}
-
-// Adicionar item ao carrinho
-if (isset($_POST['adicionar'])) {
-    $ID_itens = $_POST['ID_itens'];
-    $NOME_itens = $_POST['NOME_itens'];
-    $PRECO_itens = $_POST['PRECO_itens'];
-    $quantidade = $_POST['quantidade'];
-    
-    // Verificar se o item já existe no carrinho
-    $item_existente = false;
-    foreach ($_SESSION['carrinho'] as &$item) {
-        if ($item['ID_itens'] == $ID_itens) {
-            $item['quantidade'] += $quantidade;
-            $item_existente = true;
-            break;
-        }
-    }
-    
-    if (!$item_existente) {
-        $_SESSION['carrinho'][] = [
-            'ID_itens' => $ID_itens,
-            'NOME_itens' => $NOME_itens,
-            'PRECO_itens' => $PRECO_itens,
-            'quantidade' => $quantidade
-        ];
-    }
-}
-
-// Remover item do carrinho
-if (isset($_GET['remover'])) {
-    $id = $_GET['remover'];
-    foreach ($_SESSION['carrinho'] as $key => $item) {
-        if ($item['ID_itens'] == $id) {
-            unset($_SESSION['carrinho'][$key]);
-            break;
-        }
-    }
-    // Reindexar array
-    $_SESSION['carrinho'] = array_values($_SESSION['carrinho']);
-}
-
-// Calcular total
-$total = 0;
-foreach ($_SESSION['carrinho'] as $item) {
-    $total += $item['PRECO_itens'] * $item['quantidade'];
+// Verificar se há mensagem para exibir
+$mensagem = '';
+if (isset($_SESSION['mensagem_carrinho'])) {
+    $mensagem = $_SESSION['mensagem_carrinho'];
+    // Limpa a mensagem para não exibir novamente
+    unset($_SESSION['mensagem_carrinho']);
 }
 ?>
 
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <title>Carrinho de Compras</title>
+    <link rel="stylesheet" href="estilo.css">
     <style>
-        .carrinho {
-            border: 1px solid #ccc;
+        .carrinho-container {
+            max-width: 800px;
+            margin: 20px auto;
             padding: 20px;
-            margin: 20px 0;
         }
-        .item {
+        .carrinho-item {
             display: flex;
-            justify-content: space-between;
-            padding: 10px;
-            border-bottom: 1px solid #eee;
+            align-items: center;
+            background: white;
+            margin-bottom: 15px;
+            padding: 15px;
+            border-radius: 8px;
+            box-shadow: 0 0 8px rgba(0,0,0,0.1);
+        }
+        .carrinho-item img {
+            width: 100px;
+            height: 100px;
+            object-fit: cover;
+            border-radius: 8px;
+            margin-right: 20px;
+        }
+        .carrinho-info {
+            flex-grow: 1;
+        }
+        .carrinho-actions {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .quantidade-btn {
+            background: #5a1fa3;
+            color: white;
+            border: none;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            cursor: pointer;
+        }
+        .quantidade {
+            font-size: 18px;
+            margin: 0 10px;
+        }
+        .remover-btn {
+            background: #dc3545;
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            border-radius: 5px;
+            cursor: pointer;
         }
         .total {
-            font-weight: bold;
-            font-size: 1.2em;
             text-align: right;
+            font-size: 24px;
+            font-weight: bold;
             margin-top: 20px;
+            padding: 20px;
+            background: white;
+            border-radius: 8px;
+        }
+        .empty-cart {
+            text-align: center;
+            padding: 40px;
+            font-size: 18px;
+        }
+        .btn-continuar {
+            background: #5a1fa3;
+            color: white;
+            padding: 10px 20px;
+            text-decoration: none;
+            border-radius: 5px;
+            display: inline-block;
+            margin-top: 10px;
         }
     </style>
 </head>
 <body>
-    <h1>Seu Carrinho de Compras</h1>
 
-    <div class="carrinho">
-        <?php if (empty($_SESSION['carrinho'])): ?>
-            <p>Carrinho vazio</p>
-        <?php else: ?>
-            <?php foreach ($_SESSION['carrinho'] as $item): ?>
-                <div class="item">
-                    <span><?= $item['nome'] ?></span>
-                    <span>R$ <?= number_format($item['PRECO_itens'], 2, ',', '.') ?></span>
-                    <span>Quantidade: <?= $item['quantidade'] ?></span>
-                    <span>Subtotal: R$ <?= number_format($item['PRECO_itens'] * $item['quantidade'], 2, ',', '.') ?></span>
-                    <a href="?remover=<?= $item['ID_itens'] ?>">Remover</a>
-                </div>
-            <?php endforeach; ?>
-            
-            <div class="total">
-                Total: R$ <?= number_format($total, 2, ',', '.') ?>
-            </div>
-        <?php endif; ?>
+<?php if (!empty($mensagem)): ?>
+    <div class="mensagem-carrinho" id="mensagemCarrinho">
+        <?php echo $mensagem; ?>
     </div>
+    
+    <script>
+        // Remove a mensagem após a animação
+        setTimeout(function() {
+            var mensagem = document.getElementById('mensagemCarrinho');
+            if (mensagem) {
+                mensagem.remove();
+            }
+        }, 3000);
+    </script>
+<?php endif; ?>
 
-    <!-- Exemplo de formulário para adicionar produtos (normalmente estaria em outra página) -->
-    <h2>Adicionar Produto</h2>
-    <form method="post">
-        <input type="hidden" name="produto_id" value="1">
-        <input type="hidden" name="nome" value="Produto Exemplo">
-        <input type="hidden" name="preco" value="29.90">
-        Quantidade: <input type="number" name="quantidade" value="1" min="1">
-        <button type="submit" name="adicionar">Adicionar ao Carrinho</button>
-    </form>
+<header>
+    <h1>Restaurante do Rafa - Carrinho</h1>
+    <div style="float:right;">
+        <a href="menu.php" style="color:white;margin-right:20px;">Voltar ao Cardápio</a>
+    </div>
+</header>
+
+<div class="carrinho-container">
+    <?php if (!isset($_SESSION['carrinho']) || count($_SESSION['carrinho']) == 0): ?>
+        <div class="empty-cart">
+            <p>Seu carrinho está vazio</p>
+            <a href="menu.php" class="btn-continuar">Continuar Comprando</a>
+        </div>
+    <?php else: ?>
+        <?php
+        $total = 0;
+        foreach ($_SESSION['carrinho'] as $index => $item):
+            $subtotal = $item['PRECO_itens'] * $item['quantidade'];
+            $total += $subtotal;
+        ?>
+            <div class="carrinho-item">
+                <img src="<?php echo $item['IMG_itens']; ?>" alt="<?php echo $item['NOME_itens']; ?>">
+                <div class="carrinho-info">
+                    <h3><?php echo $item['NOME_itens']; ?></h3>
+                    <p>R$ <?php echo number_format($item['PRECO_itens'], 2, ',', '.'); ?></p>
+                </div>
+                <div class="carrinho-actions">
+                    <form method="post" action="atualizar_carrinho.php" style="display:inline;">
+                        <input type="hidden" name="index" value="<?php echo $index; ?>">
+                        <input type="hidden" name="action" value="decrease">
+                        <button type="submit" class="quantidade-btn">-</button>
+                    </form>
+                    
+                    <span class="quantidade"><?php echo $item['quantidade']; ?></span>
+                    
+                    <form method="post" action="atualizar_carrinho.php" style="display:inline;">
+                        <input type="hidden" name="index" value="<?php echo $index; ?>">
+                        <input type="hidden" name="action" value="increase">
+                        <button type="submit" class="quantidade-btn">+</button>
+                    </form>
+                    
+                    <form method="post" action="remover_carrinho.php" style="display:inline;">
+                        <input type="hidden" name="index" value="<?php echo $index; ?>">
+                        <button type="submit" class="remover-btn">Remover</button>
+                    </form>
+                </div>
+            </div>
+        <?php endforeach; ?>
+        
+        <div class="total">
+            Total: R$ <?php echo number_format($total, 2, ',', '.'); ?>
+        </div>
+        
+        <div style="text-align: center; margin-top: 20px;">
+            <a href="menu.php" class="btn-continuar">Continuar Comprando</a>
+            <button style="background: #28a745; color: white; padding: 10px 20px; border: none; border-radius: 5px; margin-left: 10px; cursor: pointer;">
+                Finalizar Pedido
+            </button>
+        </div>
+    <?php endif; ?>
+</div>
 
 </body>
 </html>

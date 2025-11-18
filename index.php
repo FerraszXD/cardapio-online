@@ -63,8 +63,8 @@ if ($_POST) {
 <h2>Login do Administrador</h2>
 
 <form method="post">
-    <input type="text" name="usuario" placeholder="Usuário" required value="admin"><br><br>
-    <input type="password" name="senha" placeholder="Senha" required value="1234"><br><br>
+    <input type="text" name="usuario" placeholder="Usuário" required value=""><br><br>
+    <input type="password" name="senha" placeholder="Senha" required value=""><br><br>
     <button type="submit">Entrar</button>
 </form>
 
