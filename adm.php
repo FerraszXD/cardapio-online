@@ -14,7 +14,7 @@ if ($_POST) {
     $preco = $_POST['preco'];
     $imagem = $_POST['imagem'];
 
-    // Correção: usar PDO prepared statements
+   
     $sql = "INSERT INTO itens (NOME_itens, DCC_itens, PRECO_itens, IMG_itens) 
             VALUES (?, ?, ?, ?)";
     
@@ -81,3 +81,5 @@ if ($_POST) {
 
 </body>
 </html>
+
+//oi

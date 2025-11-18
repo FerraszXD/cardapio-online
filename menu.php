@@ -36,4 +36,9 @@ while($row = $stmt->fetch(PDO::FETCH_ASSOC)):
 </section>
 
 </body>
+<<<<<<< Updated upstream
 </html>
+=======
+</html>
+//oi
+>>>>>>> Stashed changes

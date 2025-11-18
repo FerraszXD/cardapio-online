@@ -72,3 +72,46 @@ header {
     color: #5a1fa3;
     font-size: 18px;
 }
+
+ .btn-carrinho {
+            background: #28a745;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+                .btn-carrinho:hover {
+            background: #218838;
+        }
+        .carrinho-link {
+            background: #ffc107;
+            color: black;
+            padding: 10px 15px;
+            border-radius: 5px;
+            text-decoration: none;
+            margin-left: 60px;
+            
+            
+        }
+.mensagem-carrinho {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: #28a745;
+            color: white;
+            padding: 15px 20px;
+            border-radius: 5px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+            z-index: 1000;
+            animation: fadeInOut 3s ease-in-out;
+            max-width: 300px;
+        }
+        @keyframes fadeInOut {
+            0% { opacity: 0; transform: translateY(-20px); }
+            10% { opacity: 1; transform: translateY(0); }
+            90% { opacity: 1; transform: translateY(0); }
+            100% { opacity: 0; transform: translateY(-20px); }
+        }
+
