@@ -30,6 +30,7 @@ while($row = $stmt->fetch(PDO::FETCH_ASSOC)):
         <h2><?php echo $row['NOME_itens']; ?></h2>
         <p class="desc"><?php echo $row['DCC_itens']; ?></p>
         <p class="preco">R$ <?php echo number_format($row['PRECO_itens'],2,",","."); ?></p>
+        <p> <button onclick="window.location.href='carrinho.php'">Adicionar ao carrinho</button></p>
     </div>
 <?php endwhile; ?>
 
