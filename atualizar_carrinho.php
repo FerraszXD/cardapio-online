@@ -22,4 +22,3 @@ if ($_POST && isset($_SESSION['carrinho'])) {
 header("Location: carrinho.php");
 exit;
 ?>
-
