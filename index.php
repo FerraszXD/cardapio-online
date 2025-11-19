@@ -15,7 +15,7 @@ if ($_POST) {
 
     if ($result) {
         $_SESSION['admin'] = true;
-        header("Location: adm.php");
+        header("Location: menu_adm.php");
         exit;
     } else {
         $erro = "Usuário ou senha errados, genio.";
