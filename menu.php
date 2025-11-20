@@ -24,14 +24,7 @@ if (isset($_SESSION['mensagem_carrinho'])) {
     unset($_SESSION['mensagem_carrinho']);
 
 }
-
-
-
 ?>
-
-
-
-
 
 <!DOCTYPE html>
 <html lang="pt-BR">
@@ -43,11 +36,14 @@ if (isset($_SESSION['mensagem_carrinho'])) {
 <body>
 
 <header>
+    
     <h1>Restaurante do Rafa</h1>
     <a href="index.php" style="color:white;float:right;margin-right:20px;">Admin</a>
     <a href="carrinho.php" class="carrinho-link">
         Carrinho (<?php echo $total_carrinho; ?>)
     </a>
+
+    
 </header>
 
 <?php if (!empty($mensagem)): ?>
@@ -64,6 +60,7 @@ if (isset($_SESSION['mensagem_carrinho'])) {
             }
         }, 3000);
     </script>
+
 <?php endif; ?>
 
 <section class="cardapio">

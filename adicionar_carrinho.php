@@ -21,7 +21,7 @@ if ($_POST) {
         if ($carrinho_item['ID_itens'] == $item['ID_itens']) {
             $carrinho_item['quantidade']++;
             $item_existente = true;
-            $mensagem = "'$quantidade' , '$nome' adicionado(a) ao carrinho!";
+            $mensagem = "adicionado(a) ao carrinho!";
             break;
         }
     }
@@ -29,7 +29,7 @@ if ($_POST) {
     // Se não existe, adiciona ao carrinho
     if (!$item_existente) {
         $_SESSION['carrinho'][] = $item;
-         $mensagem = "'$nome' adicionado(a) ao carrinho!";
+         $mensagem = "'$NOME_itens'adicionado(a) ao carrinho!";
     }
     
  $_SESSION['mensagem_carrinho'] = $mensagem;

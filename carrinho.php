@@ -164,9 +164,7 @@ if (isset($_SESSION['mensagem_carrinho'])) {
         
         <div style="text-align: center; margin-top: 20px;">
             <a href="menu.php" class="btn-continuar">Continuar Comprando</a>
-            <button style="background: #28a745; color: white; padding: 10px 20px; border: none; border-radius: 5px; margin-left: 10px; cursor: pointer;">
-                Finalizar Pedido
-            </button>
+            <button onclick="window.location.href='pronto.php'" style="background: #28a745; color: white; padding: 10px 20px; border: none; border-radius: 5px; margin-left: 10px; cursor: pointer;">  Finalizar Pedido</button>
         </div>
     <?php endif; ?>
 </div>

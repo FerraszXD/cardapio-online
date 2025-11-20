@@ -6,7 +6,7 @@ if ($_POST && isset($_SESSION['carrinho'])) {
     $action = $_POST['action'];
     
     if (isset($_SESSION['carrinho'][$index])) {
-        $nome_item = $_SESSION['carrinho'][$index]['NOME_itens'];
+        $NOME_itens = $_SESSION['carrinho'][$index]['NOME_itens'];
         if ($action == 'increase') {
             $_SESSION['carrinho'][$index]['quantidade']++;
             $_SESSION['mensagem_carrinho'] = "Quantidade de '$NOME_itens' aumentada!";
