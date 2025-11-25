@@ -37,7 +37,7 @@ if (isset($_SESSION['mensagem_carrinho'])) {
 
 <header>
     
-    <h1>Restaurante do Rafa</h1>
+    <h1>Restaurante Fucinho de tomada</h1>
     <a href="index.php" style="color:white;float:right;margin-right:20px;">Admin</a>
     <a href="carrinho.php" class="carrinho-link">
         Carrinho (<?php echo $total_carrinho; ?>)

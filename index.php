@@ -29,34 +29,8 @@ if ($_POST) {
     <link rel="stylesheet" href="estilo.css">
     <meta charset="UTF-8">
     <title>Login Admin</title>
-    <style>
-        body {
-            max-width: 400px;
-            margin: 50px auto;
-            padding: 20px;
-            font-family: Arial, sans-serif;
-        }
-        form {
-            background: #f5f5f5;
-            padding: 20px;
-            border-radius: 8px;
-        }
-        input {
-            width: 100%;
-            padding: 8px;
-            margin: 5px 0;
-            box-sizing: border-box;
-        }
-        button {
-            background: #5a1fa3;
-            color: white;
-            padding: 10px 15px;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-            margin: 5px;
-        }
-    </style>
+
+    
 </head>
 <body>
 

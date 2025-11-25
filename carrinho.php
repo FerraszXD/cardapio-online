@@ -15,83 +15,10 @@ if (isset($_SESSION['mensagem_carrinho'])) {
     <meta charset="UTF-8">
     <title>Carrinho de Compras</title>
     <link rel="stylesheet" href="estilo.css">
-    <style>
-        .carrinho-container {
-            max-width: 800px;
-            margin: 20px auto;
-            padding: 20px;
-        }
-        .carrinho-item {
-            display: flex;
-            align-items: center;
-            background: white;
-            margin-bottom: 15px;
-            padding: 15px;
-            border-radius: 8px;
-            box-shadow: 0 0 8px rgba(0,0,0,0.1);
-        }
-        .carrinho-item img {
-            width: 100px;
-            height: 100px;
-            object-fit: cover;
-            border-radius: 8px;
-            margin-right: 20px;
-        }
-        .carrinho-info {
-            flex-grow: 1;
-        }
-        .carrinho-actions {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-        .quantidade-btn {
-            background: #5a1fa3;
-            color: white;
-            border: none;
-            width: 30px;
-            height: 30px;
-            border-radius: 50%;
-            cursor: pointer;
-        }
-        .quantidade {
-            font-size: 18px;
-            margin: 0 10px;
-        }
-        .remover-btn {
-            background: #dc3545;
-            color: white;
-            border: none;
-            padding: 5px 10px;
-            border-radius: 5px;
-            cursor: pointer;
-        }
-        .total {
-            text-align: right;
-            font-size: 24px;
-            font-weight: bold;
-            margin-top: 20px;
-            padding: 20px;
-            background: white;
-            border-radius: 8px;
-        }
-        .empty-cart {
-            text-align: center;
-            padding: 40px;
-            font-size: 18px;
-        }
-        .btn-continuar {
-            background: #5a1fa3;
-            color: white;
-            padding: 10px 20px;
-            text-decoration: none;
-            border-radius: 5px;
-            display: inline-block;
-            margin-top: 10px;
-        }
-    </style>
 </head>
 <body>
+
+//parte que monta a mensagem
 
 <?php if (!empty($mensagem)): ?>
     <div class="mensagem-carrinho" id="mensagemCarrinho">
@@ -110,7 +37,7 @@ if (isset($_SESSION['mensagem_carrinho'])) {
 <?php endif; ?>
 
 <header>
-    <h1>Restaurante do Rafa - Carrinho</h1>
+    <h1>Restaurante Fucinho de Tomada - Carrinho</h1>
     <div style="float:right;">
         <a href="menu.php" style="color:white;margin-right:20px;">Voltar ao Cardápio</a>
     </div>
